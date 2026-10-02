@@ -58,7 +58,14 @@
 		{ name: 'Deepspace', logo: '/sponsors/deepspace.png' },
 		{ name: 'Lumix', logo: '/sponsors/lumix.png' },
 		{ name: 'Nexus', logo: '/sponsors/nexus.png' },
-		{ name: 'Google', logo: '/sponsors/google.svg' }
+		{ name: 'ElevenLabs', logo: '/sponsors/elevenlabs.png', url: 'https://elevenlabs.io' },
+		{
+			name: 'Google Developer Group',
+			logo: '/sponsors/gdg-on-campus.png',
+			url: 'https://gdsclsu.org'
+		},
+		{ name: 'Grassfed Development', logo: '/sponsors/grassfed.svg', url: 'https://grassfed.dev' },
+		{ name: 'eFCU Financial', logo: '/sponsors/efcu.png', url: 'https://www.efcufinancial.org' }
 	];
 
 	const clubs: Partner[] = [
@@ -396,11 +403,23 @@
 
 			<div id="sponsors" class="section-body">
 				<p use:reveal class="group-label">Sponsors</p>
-				<div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
+				<div class="flex flex-wrap justify-center gap-4">
 					{#each sponsors as sponsor, i (sponsor.name)}
-						<div use:reveal={{ delay: i * 70 }} use:pulse class="logo-tile">
+						<svelte:element
+							this={sponsor.url ? 'a' : 'div'}
+							href={sponsor.url}
+							target={sponsor.url ? '_blank' : null}
+							rel={sponsor.url ? 'noreferrer' : null}
+							aria-label={sponsor.url ? `${sponsor.name} website` : null}
+							use:reveal={{ delay: i * 70 }}
+							use:pulse
+							class="logo-tile w-[calc(50%-0.6rem)] min-w-0 lg:w-[calc(25%-0.85rem)]"
+						>
 							<PartnerMark src={sponsor.logo} alt={`${sponsor.name} logo`} />
-						</div>
+							{#if sponsor.url}
+								<span class="tile-link-glyph" aria-hidden="true">↗</span>
+							{/if}
+						</svelte:element>
 					{/each}
 				</div>
 			</div>
